@@ -5,15 +5,25 @@ public class TransactionModel {
     private String note;
     private String amount;
     private String type;
+    private String date;
 
     public TransactionModel() {
     }
 
-    public TransactionModel(String id, String note, String amount, String type) {
+    public TransactionModel(String id, String note, String amount, String type, String date) {
         this.id = id;
         this.note = note;
         this.amount = amount;
         this.type = type;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getId() {
