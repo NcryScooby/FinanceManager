@@ -52,6 +52,16 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        binding.refreshBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(new Intent(DashboardActivity.this, DashboardActivity.class));
+                    finish();
+                } catch (Exception e) {
+            }
+        }
+        });
         loadData();
     }
 
