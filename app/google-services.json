@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "328609933689",
+    "project_id": "financemanager-86146",
+    "storage_bucket": "financemanager-86146.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328609933689:android:1df93fd03a4f177c7e27a8",
+        "android_client_info": {
+          "package_name": "br.com.uniritter.financemanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQs1zeEGb_B4wCNyleTHsEWsqTYOeV76o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
