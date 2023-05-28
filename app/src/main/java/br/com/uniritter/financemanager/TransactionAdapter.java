@@ -1,6 +1,7 @@
 package br.com.uniritter.financemanager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,18 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.amount.setText(model.getAmount());
         holder.date.setText(model.getDate());
         holder.note.setText(model.getNote());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UpdateActivity.class);
+                intent.putExtra("id", transactionModelArrayList.get(position).getId());
+                intent.putExtra("amount", transactionModelArrayList.get(position).getAmount());
+                intent.putExtra("note", transactionModelArrayList.get(position).getNote());
+                intent.putExtra("type", transactionModelArrayList.get(position).getType());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
