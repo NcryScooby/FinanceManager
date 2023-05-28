@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"/>
     </RelativeLayout>
     <EditText
+        android:id="@+id/user_amount_add"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:inputType="number"
@@ -34,9 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
+        android:id="@+id/user_note_add"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:inputType="number"
         android:hint="Observação"
         android:textAlignment="textStart"
         android:gravity="start"
@@ -55,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <CheckBox
+            android:id="@+id/expense_check_box"
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -62,6 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <CheckBox
+            android:id="@+id/income_check_box"
             android:gravity="center"
             android:layout_weight="1"
             android:text="Ganho"
@@ -69,6 +72,7 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <Button
+        android:id="@+id/btn_add_transaction"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="12dp"
