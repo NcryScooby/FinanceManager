@@ -86,7 +86,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void createSignOutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
-        builder.setTitle("Deletar").setMessage("Tem certeza que deseja sair?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+        builder.setTitle("Sair").setMessage("Tem certeza que deseja sair?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 firebaseAuth.signOut();
