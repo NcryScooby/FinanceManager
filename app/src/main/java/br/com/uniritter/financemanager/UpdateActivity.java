@@ -19,6 +19,7 @@ public class UpdateActivity extends AppCompatActivity {
     String newType;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,7 @@ public class UpdateActivity extends AppCompatActivity {
         binding.userAmountAdd.setText(amount);
         binding.userNoteAdd.setText(note);
 
-        switch (type){
+        switch (type) {
             case "Income":
                 newType = "Income";
                 binding.incomeCheckBox.setChecked(true);
@@ -64,6 +65,27 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
 
+        binding.btnDeleteTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseFirestore.collection("expenses").document(firebaseAuth.getUid())
+                        .collection("Notes")
+                        .document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                onBackPressed();
+                                Toast.makeText(UpdateActivity.this, "Deletado com sucesso", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
         binding.btnUpdateTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,24 +108,6 @@ public class UpdateActivity extends AppCompatActivity {
                                 Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
-                binding.btnDeleteTransaction.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                       firebaseFirestore.collection("expenses").document(firebaseAuth.getUid())
-                               .collection("Notes")
-                               .document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                   @Override
-                                   public void onSuccess(Void unused) {
-                                        onBackPressed();
-                                        Toast.makeText(UpdateActivity.this, "Deletado com sucesso", Toast.LENGTH_SHORT).show();
-                                   }
-                               }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }});
-                    }
-                });
             }
         });
     }

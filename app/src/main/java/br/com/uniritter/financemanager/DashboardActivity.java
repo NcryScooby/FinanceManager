@@ -1,9 +1,11 @@
 package br.com.uniritter.financemanager;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +43,23 @@ public class DashboardActivity extends AppCompatActivity {
         binding.historyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.historyRecyclerView.setHasFixedSize(true);
 
+        firebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser()==null){
+                    startActivity(new Intent(DashboardActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+        });
+
+        binding.signOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createSignOutDialog();
+            }
+        });
+
         binding.addFloatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +82,22 @@ public class DashboardActivity extends AppCompatActivity {
         }
         });
         loadData();
+    }
+
+    private void createSignOutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+        builder.setTitle("Deletar").setMessage("Tem certeza que deseja sair?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                firebaseAuth.signOut();
+            }
+        }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
     }
 
     private void loadData() {
