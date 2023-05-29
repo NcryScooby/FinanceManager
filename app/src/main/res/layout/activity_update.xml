@@ -18,7 +18,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:text="Adicionar Gasto"
+            android:text="Gerenciar Transação"
             android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -28,7 +28,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:inputType="number"
-        android:hint="Quantia"
+        android:hint="Valor"
         android:layout_marginTop="30dp"
         android:padding="15dp"
         android:background="@drawable/edit_text_bg"
@@ -60,14 +60,14 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Gasto"
+            android:text="Saída"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/income_check_box"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="Ganho"
+            android:text="Entrada"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>

@@ -1,7 +1,9 @@
 package br.com.uniritter.financemanager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.NumberFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.MyViewHolder> {
     Context context;
@@ -31,7 +34,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TransactionAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TransactionAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         TransactionModel model = transactionModelArrayList.get(position);
         String priority = model.getType();
         if (priority.equals("Expense")){
@@ -39,7 +42,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         } else {
             holder.priority.setBackgroundResource(R.drawable.green_shape);
         }
-        holder.amount.setText(model.getAmount());
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+        if (priority.equals("Expense")){
+            holder.amount.setText("- " + currencyFormat.format(Double.parseDouble(model.getAmount())));
+        } else {
+            holder.amount.setText("+ " + currencyFormat.format(Double.parseDouble(model.getAmount())));
+        }
+
         holder.date.setText(model.getDate());
         holder.note.setText(model.getNote());
 

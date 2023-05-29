@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.view.View;
 
@@ -18,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import br.com.uniritter.financemanager.databinding.ActivityDashboardBinding;
 
@@ -28,6 +30,7 @@ public class DashboardActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     int sumExpense = 0;
     int sumIncome = 0;
+    int total = 0;
     ArrayList<TransactionModel> transactionModelArrayList;
     TransactionAdapter transactionAdapter;
 
@@ -127,9 +130,16 @@ public class DashboardActivity extends AppCompatActivity {
                         transactionModelArrayList.add(model);
                     }
 
-                    binding.totalIncome.setText(String.valueOf("R$ " + sumIncome));
-                    binding.totalExpense.setText(String.valueOf("R$ " + sumExpense));
-                    binding.totalBalance.setText(String.valueOf("R$ " + (sumIncome - sumExpense)));
+                    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+                    total = sumIncome - sumExpense;
+                    if (total < 0) {
+                        total = total * -1;
+                    }
+
+                    binding.totalIncome.setText("+ " + String.valueOf(currencyFormat.format(sumIncome)));
+                    binding.totalExpense.setText("- " + String.valueOf(currencyFormat.format(sumExpense)));
+                    binding.totalBalance.setText("- " + String.valueOf(currencyFormat.format(total)));
 
                     transactionAdapter = new TransactionAdapter(DashboardActivity.this, transactionModelArrayList);
                     binding.historyRecyclerView.setAdapter(transactionAdapter);
