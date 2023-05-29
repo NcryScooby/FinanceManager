@@ -160,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/add_img"
-                android:text="Adicionar Gasto"
+                android:text="Adicionar Transação"
                 android:textColor="@color/white" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

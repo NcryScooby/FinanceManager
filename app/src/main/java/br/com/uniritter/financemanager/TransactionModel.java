@@ -4,22 +4,32 @@ public class TransactionModel {
     private String id;
     private String note;
     private String amount;
+    private String category;
     private String type;
     private String date;
 
     public TransactionModel() {
     }
 
-    public TransactionModel(String id, String note, String amount, String type, String date) {
+    public TransactionModel(String id, String note, String amount, String category, String type, String date) {
         this.id = id;
         this.note = note;
         this.amount = amount;
+        this.category = category;
         this.type = type;
         this.date = date;
     }
 
     public String getDate() {
         return date;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setDate(String date) {

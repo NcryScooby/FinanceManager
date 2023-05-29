@@ -27,7 +27,7 @@
         android:id="@+id/user_amount_add"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:hint="Valor"
         android:layout_marginTop="30dp"
         android:padding="15dp"
@@ -46,6 +46,18 @@
         android:background="@drawable/edit_text_bg"
         android:layout_width="match_parent"
         android:layout_height="100dp"/>
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_bg"
+        android:spinnerMode="dropdown"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="textStart"
+        android:padding="8dp"
+        />
 
     <LinearLayout
         android:layout_marginRight="10dp"

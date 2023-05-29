@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +39,9 @@ public class AddTransactionActivity extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+        Spinner dropdown = findViewById(R.id.spinner1);
+        String[] items = new String[]{"Alimentação", "Roupas", "Transporte", "Lazer", "Educação", "Saúde", "Salário", "Outros"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items); dropdown.setAdapter(adapter);
 
         binding.expenseCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +81,7 @@ public class AddTransactionActivity extends AppCompatActivity {
               transaction.put("id", id);
               transaction.put("amount", amount);
               transaction.put("note", note);
+              transaction.put("category", dropdown.getSelectedItem().toString());
               transaction.put("type", type);
               transaction.put("date", currentDateandTime);
 

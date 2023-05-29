@@ -27,7 +27,7 @@
         android:id="@+id/user_amount_add"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:hint="Valor"
         android:layout_marginTop="30dp"
         android:padding="15dp"

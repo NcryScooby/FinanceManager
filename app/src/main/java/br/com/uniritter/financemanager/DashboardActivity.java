@@ -28,9 +28,9 @@ public class DashboardActivity extends AppCompatActivity {
     ActivityDashboardBinding binding;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
-    int sumExpense = 0;
-    int sumIncome = 0;
-    int total = 0;
+    double sumExpense = 0;
+    double sumIncome = 0;
+    double total = 0;
     ArrayList<TransactionModel> transactionModelArrayList;
     TransactionAdapter transactionAdapter;
 
@@ -119,9 +119,10 @@ public class DashboardActivity extends AppCompatActivity {
                                 ds.getString("id"),
                                 ds.getString("note"),
                                 ds.getString("amount"),
+                                ds.getString("category"),
                                 ds.getString("type"),
                                 ds.getString("date"));
-                        int amount = Integer.parseInt(ds.getString("amount"));
+                        double amount = Double.parseDouble(ds.getString("amount"));
                         if (ds.getString("type").equals("Expense")){
                             sumExpense += amount;
                         } else {
@@ -133,13 +134,14 @@ public class DashboardActivity extends AppCompatActivity {
                     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
                     total = sumIncome - sumExpense;
-                    if (total < 0) {
-                        total = total * -1;
-                    }
 
-                    binding.totalIncome.setText("+ " + String.valueOf(currencyFormat.format(sumIncome)));
-                    binding.totalExpense.setText("- " + String.valueOf(currencyFormat.format(sumExpense)));
-                    binding.totalBalance.setText("- " + String.valueOf(currencyFormat.format(total)));
+                    binding.totalIncome.setText("+ " + currencyFormat.format(sumIncome));
+                    binding.totalExpense.setText("- " + currencyFormat.format(sumExpense));
+                    binding.totalBalance.setText(
+                            total < 0 ? (
+                                    "- " + currencyFormat.format(total).replace("-", "")
+                                    ) : String.valueOf(currencyFormat.format(total))
+                    );
 
                     transactionAdapter = new TransactionAdapter(DashboardActivity.this, transactionModelArrayList);
                     binding.historyRecyclerView.setAdapter(transactionAdapter);

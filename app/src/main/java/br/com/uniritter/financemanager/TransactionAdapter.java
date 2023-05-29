@@ -38,9 +38,48 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         TransactionModel model = transactionModelArrayList.get(position);
         String priority = model.getType();
         if (priority.equals("Expense")){
-            holder.priority.setBackgroundResource(R.drawable.red_shape);
+            holder.type.setText("Saída");
+            holder.type.setTextColor(context.getResources().getColor(R.color.red));
         } else {
-            holder.priority.setBackgroundResource(R.drawable.green_shape);
+            holder.type.setTextColor(context.getResources().getColor(R.color.green));
+        }
+
+        // add icon to category
+        switch (model.getCategory()) {
+            case "Alimentação":
+                holder.category.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_fastfood_24, 0, 0, 0);
+                holder.category.setCompoundDrawablePadding(20);
+                break;
+            case "Roupas":
+                holder.category.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_shopping_bag_24, 0, 0, 0);
+                holder.category.setCompoundDrawablePadding(20);
+                break;
+            case "Transporte":
+                holder.category.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_directions_bus_24, 0, 0, 0);
+                holder.category.setCompoundDrawablePadding(20);
+                break;
+            case "Lazer":
+                holder.category.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_beach_access_24, 0, 0, 0);
+                holder.category.setCompoundDrawablePadding(20);
+                break;
+            case "Educação":
+                holder.category.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_school_24, 0, 0, 0);
+                holder.category.setCompoundDrawablePadding(20);
+                break;
+            case "Saúde":
+                holder.category.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_medical_services_24, 0, 0, 0);
+                holder.category.setCompoundDrawablePadding(20);
+                break;
+            case "Salário":
+                holder.category.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_attach_money_24, 0, 0, 0);
+                holder.category.setCompoundDrawablePadding(20);
+                break;
+            case "Outros":
+                holder.category.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_deck_24, 0, 0, 0);
+                holder.category.setCompoundDrawablePadding(20);
+                break;
+            default:
+                break;
         }
 
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
@@ -53,6 +92,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         holder.date.setText(model.getDate());
         holder.note.setText(model.getNote());
+        holder.category.setText(model.getCategory());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +100,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 Intent intent = new Intent(context, UpdateActivity.class);
                 intent.putExtra("id", transactionModelArrayList.get(position).getId());
                 intent.putExtra("amount", transactionModelArrayList.get(position).getAmount());
+                intent.putExtra("category", transactionModelArrayList.get(position).getCategory());
                 intent.putExtra("note", transactionModelArrayList.get(position).getNote());
                 intent.putExtra("type", transactionModelArrayList.get(position).getType());
                 context.startActivity(intent);
@@ -74,14 +115,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView note, amount, date;
+        TextView note, amount, date, category, type;
         View priority;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             note = itemView.findViewById(R.id.note_one);
             amount = itemView.findViewById(R.id.amount_one);
+            category = itemView.findViewById(R.id.category_one);
             date = itemView.findViewById(R.id.date_one);
-            priority = itemView.findViewById(R.id.priority_one);
+            type = itemView.findViewById(R.id.type_one);
         }
     }
 }
