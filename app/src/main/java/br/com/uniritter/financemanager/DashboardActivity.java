@@ -100,10 +100,17 @@ public class DashboardActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadData();
+    }
+
     private void loadData() {
     firebaseFirestore.collection("expenses").document(firebaseAuth.getUid()).collection("Notes").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    transactionModelArrayList.clear();
                     for (DocumentSnapshot ds: task.getResult()){
                         TransactionModel model = new TransactionModel(
                                 ds.getString("id"),
