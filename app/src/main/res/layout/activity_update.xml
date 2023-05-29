@@ -84,6 +84,7 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <Button
+        android:background="@drawable/button"
         android:id="@+id/btn_update_transaction"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
@@ -92,6 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
+        android:background="@drawable/button"
         android:id="@+id/btn_delete_transaction"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
