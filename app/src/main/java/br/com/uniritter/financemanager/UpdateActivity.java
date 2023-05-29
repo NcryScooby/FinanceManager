@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,14 +30,19 @@ public class UpdateActivity extends AppCompatActivity {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+        Spinner dropdown = findViewById(R.id.spinner1);
+        String[] items = new String[]{"Alimentação", "Roupas", "Transporte", "Lazer", "Educação", "Saúde", "Salário", "Outros"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items); dropdown.setAdapter(adapter);
 
         String id = getIntent().getStringExtra("id");
         String amount = getIntent().getStringExtra("amount");
         String note = getIntent().getStringExtra("note");
+        String category = getIntent().getStringExtra("category");
         String type = getIntent().getStringExtra("type");
 
         binding.userAmountAdd.setText(amount);
         binding.userNoteAdd.setText(note);
+        dropdown.setSelection(adapter.getPosition(category));
 
         switch (type) {
             case "Income":
@@ -92,9 +99,10 @@ public class UpdateActivity extends AppCompatActivity {
 
                 String amount = binding.userAmountAdd.getText().toString();
                 String note = binding.userNoteAdd.getText().toString();
+                String category = dropdown.getSelectedItem().toString();
 
                 firebaseFirestore.collection("expenses").document(firebaseAuth.getUid())
-                        .collection("Notes").document(id).update("amount", amount, "note", note, "type", newType)
+                        .collection("Notes").document(id).update("amount", amount, "note", note, "type", newType, "category", category)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
