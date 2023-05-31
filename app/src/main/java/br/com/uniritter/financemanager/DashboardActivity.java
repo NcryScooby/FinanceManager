@@ -114,6 +114,11 @@ public class DashboardActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     transactionModelArrayList.clear();
+
+                    sumExpense = 0.0;
+                    sumIncome = 0.0;
+                    total = 0.0;
+
                     for (DocumentSnapshot ds: task.getResult()){
                         TransactionModel model = new TransactionModel(
                                 ds.getString("id"),
@@ -131,6 +136,9 @@ public class DashboardActivity extends AppCompatActivity {
                         transactionModelArrayList.add(model);
                     }
 
+                    System.out.println(sumExpense);
+                    System.out.println(sumIncome);
+
                     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
                     total = sumIncome - sumExpense;
@@ -140,7 +148,7 @@ public class DashboardActivity extends AppCompatActivity {
                     binding.totalBalance.setText(
                             total < 0 ? (
                                     "- " + currencyFormat.format(total).replace("-", "")
-                                    ) : String.valueOf(currencyFormat.format(total))
+                            ) : String.valueOf(currencyFormat.format(total))
                     );
 
                     transactionAdapter = new TransactionAdapter(DashboardActivity.this, transactionModelArrayList);

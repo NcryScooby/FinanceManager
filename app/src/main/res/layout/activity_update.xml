@@ -14,6 +14,7 @@
         android:background="@color/red"
         android:layout_height="?actionBarSize">
         <TextView
+            android:fontFamily="@font/baloo23"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"/>
     </RelativeLayout>
     <EditText
+        android:fontFamily="@font/baloo23"
         android:id="@+id/user_note_add"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
@@ -36,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
+        android:fontFamily="@font/baloo23"
         android:id="@+id/user_amount_add"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
@@ -47,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Spinner
+        android:fontFamily="@font/baloo23"
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -68,6 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <CheckBox
+            android:fontFamily="@font/baloo23"
             android:id="@+id/expense_check_box"
             android:gravity="center"
             android:layout_gravity="center"
@@ -76,6 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <CheckBox
+            android:fontFamily="@font/baloo23"
             android:id="@+id/income_check_box"
             android:gravity="center"
             android:layout_weight="1"
@@ -84,6 +90,7 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <Button
+        android:fontFamily="@font/baloo23"
         android:background="@drawable/button"
         android:id="@+id/btn_update_transaction"
         android:layout_marginRight="10dp"
@@ -93,6 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
+        android:fontFamily="@font/baloo23"
         android:background="@drawable/button"
         android:id="@+id/btn_delete_transaction"
         android:layout_marginRight="10dp"
