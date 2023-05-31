@@ -71,6 +71,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
               if (type.length() <= 0){
                   Toast.makeText(AddTransactionActivity.this, "Selecione um Tipo de Transação", Toast.LENGTH_SHORT).show();
+                    return;
               }
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy HH:mm", Locale.getDefault());
